@@ -26,7 +26,9 @@ public class ServerImplements extends UnicastRemoteObject implements RemoteInter
 
     @Override
     public String solicitar(String solicitud) throws Exception {
-        Registry reg = LocateRegistry.getRegistry("localHost", 3334);
+        /**
+
+        Registry reg = LocateRegistry.getRegistry("192.168.5.102", 3334);
         RemoteInterface remote = (RemoteInterface) reg.lookup("SOLICITAR");
         Date dateS = new Date(), dateF = new Date();
         Calendar cal = Calendar.getInstance();
@@ -42,5 +44,7 @@ public class ServerImplements extends UnicastRemoteObject implements RemoteInter
         String enviar = fecha + " " + fecha2;
         solicitud = solicitud +" "+enviar; 
         return remote.solicitar(solicitud);
+        */
+        return "yes";
     }
 }
