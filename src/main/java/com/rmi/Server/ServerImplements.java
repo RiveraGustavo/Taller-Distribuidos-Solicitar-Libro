@@ -21,7 +21,7 @@ import java.util.Date;
 public class ServerImplements extends UnicastRemoteObject implements RemoteInterface {
 
     public ServerImplements() throws RemoteException {
-        super();
+        super(); 
     }
 
     @Override

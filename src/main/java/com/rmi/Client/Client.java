@@ -6,6 +6,7 @@
 package com.rmi.Client;
 
 import com.rmi.RMI.RemoteInterface;
+import com.rmi.Server.ServerImplements;
 import java.rmi.AccessException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -37,25 +38,21 @@ public class Client {
     }
 
     private void conectRemote() {
-        int a = 1;
-        int b = 2;
 
         try {
             int nEnviar = 0;
             DataBase db = new DataBase();
             List<String> peticiones = db.leerFichero("peticiones.txt");
-            String request = "";
             while (nEnviar < peticiones.size()) {
 
                 //System.setProperty("java.rmi.server.hostname","192.168.5.102");
-                //System.setSecurityManager(new RMISecurityManager());
-                //Registry reg = LocateRegistry.getRegistry("localhost", 3333);
+                Registry reg = LocateRegistry.getRegistry("192.168.0.114", 3333);
                 //Registry reg = LocateRegistry.getRegistry("192.168.5.102", 3333);                
-                //RemoteInterface remote = (RemoteInterface) reg.lookup("SOLICITAR");
-                nEnviar++;
-
-                RemoteInterface remote = (RemoteInterface) Naming.lookup("rmi://localhost:3333/SOLICITAR");
+                RemoteInterface remote = (RemoteInterface) reg.lookup("SOLICITAR");
+                //RemoteInterface remote = (RemoteInterface) Naming.lookup("rmi://192.168.0.5:3333/SOLICITAR");
+                //RemoteInterface remote = (RemoteInterface) Naming.lookup("rmi://192.168.5.102:3333/SOLICITAR");
                 System.out.println("RS: " + remote.solicitar(peticiones.get(nEnviar)));
+                nEnviar++;
             }
 
         } catch (RemoteException ex) {

@@ -23,13 +23,13 @@ public class GestorCarga
     {
         try {
             Registry reg = LocateRegistry.createRegistry(3333);
-            Naming.rebind("rmi://localhost:3333/SOLICITAR", new ServerImplements());
-            //reg.bind("SOLICITAR", new ServerImplements());
+            //Naming.rebind("rmi://192.168.0.5:3333/SOLICITAR", new ServerImplements());
+            //Naming.rebind("rmi://localhost:3333/SOLICITAR", new ServerImplements());
+            //RemoteInterface stub = (RemoteInterface) UnicastRemoteObject.exportObject(in, 0);
+            reg.rebind("SOLICITAR", new ServerImplements());
             System.out.println("SERVER ON");
         } catch (RemoteException ex) {
             Logger.getLogger(GestorCarga.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(GestorCarga.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 }
