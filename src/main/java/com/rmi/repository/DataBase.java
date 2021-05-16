@@ -72,6 +72,7 @@ public class DataBase {
         List<Prestamo> prestamos = new ArrayList<>();
         Prestamo prestamo;
         try {
+<<<<<<< HEAD
             if (waitFile(arg)) {
                 archivo = new File(arg);
                 if (archivo.exists()) {
@@ -93,9 +94,29 @@ public class DataBase {
                                 Integer.valueOf(textElements[3]), textElements[4].toString(),
                                 Boolean.parseBoolean(textElements[5]));
                         prestamos.add(prestamo);
+=======
+            sem.acquire();
+            archivo = new File(arg);
+            if (archivo.exists()) {
+                fr = new FileReader(archivo);
+                br = new BufferedReader(fr);
+                String linea;
+                String[] textElements;
+                SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
+                Date dt_1;
+                Date dt_2;
+                while ((linea = br.readLine()) != null ) {
+                    if(linea.equals("")){
+                        break; 
+>>>>>>> 714fa344733c2b3e99e22bbb22246209d44a6d76
                     }
                     fr.close();
                 }
+<<<<<<< HEAD
+=======
+                fr.close();
+                sem.release();
+>>>>>>> 714fa344733c2b3e99e22bbb22246209d44a6d76
             }
         } catch (Exception e) {
             System.out.println("Error en DataBase leer fichero prestamo por " + e.getMessage());
@@ -118,10 +139,17 @@ public class DataBase {
         BufferedReader br;
         Boolean modifico = false;
         try {
+<<<<<<< HEAD
             if (waitFile(arg)) {
                 archivo = new File(arg);
                 if (archivo.exists()) {
                     br = new BufferedReader(new FileReader(archivo));
+=======
+            sem.acquire();
+            archivo = new File(arg);
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+>>>>>>> 714fa344733c2b3e99e22bbb22246209d44a6d76
 
                     Date fechaSolicitud = prestamo.getFechaSolicitud();
                     Date fechaFinalizacion = prestamo.getFechaFinalizacion();
@@ -148,10 +176,19 @@ public class DataBase {
                             escribir(fNuevo, linea);
                         }
                     }
+<<<<<<< HEAD
                     br.close();
                     borrar(archivo);
                     fNuevo.renameTo(archivo);
                     modifico = true;
+=======
+                }
+                br.close();
+                sem.release();
+                borrar(archivo);
+                fNuevo.renameTo(archivo);
+                modifico = true;
+>>>>>>> 714fa344733c2b3e99e22bbb22246209d44a6d76
 
                 } else {
                     throw new Exception("Error en DataBase fichero prestamo por fichero no existe");
@@ -175,10 +212,17 @@ public class DataBase {
         BufferedReader br;
         Boolean modifico = false;
         try {
+<<<<<<< HEAD
             if (waitFile(arg)) {
                 archivo = new File(arg);
                 if (archivo.exists()) {
                     br = new BufferedReader(new FileReader(archivo));
+=======
+            sem.acquire();
+            archivo = new File(arg);
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+>>>>>>> 714fa344733c2b3e99e22bbb22246209d44a6d76
 
                     String insertar = libro.getID() + "," + libro.getCodigo() + "," + libro.getUnidades() + ","
                             + libro.getUnidadesPrestadas() + ","
@@ -194,10 +238,19 @@ public class DataBase {
                             escribir(fNuevo, linea);
                         }
                     }
+<<<<<<< HEAD
                     br.close();
                     borrar(archivo);
                     fNuevo.renameTo(archivo);
                     modifico = true;
+=======
+                }
+                br.close();
+                sem.release();
+                borrar(archivo);
+                fNuevo.renameTo(archivo);
+                modifico = true;
+>>>>>>> 714fa344733c2b3e99e22bbb22246209d44a6d76
 
                 } else {
                     throw new Exception("Error en DataBase fichero prestamo por fichero no existe");
@@ -266,6 +319,7 @@ public class DataBase {
                     String lastLine = "";
                     String sCurrentLine;
 
+<<<<<<< HEAD
                     while ((sCurrentLine = br.readLine()) != null) {
                         lastLine = sCurrentLine;
                     }
@@ -282,6 +336,16 @@ public class DataBase {
                     escribir(archivo, insertar);
                     br.close();
                     modifico = true;
+=======
+                String insertar = prestamo.getIdSolicitud() + "," + fechaInicial + "," + fechaFinal + ","
+                        + prestamo.getIdSolicitante() + "," + prestamo.getCodigoLibro() + ","
+                        + prestamo.getFinalizado().toString();
+                sem.acquire();
+                escribir(archivo, insertar);
+                br.close();
+                sem.release();
+                modifico = true;
+>>>>>>> 714fa344733c2b3e99e22bbb22246209d44a6d76
 
                 } else {
                     throw new Exception("Error en DataBase fichero prestamo por fichero no existe");

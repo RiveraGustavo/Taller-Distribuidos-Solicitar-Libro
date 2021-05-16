@@ -27,7 +27,7 @@ public class ServerImplements implements RemoteInterface {
     @Override
     public String solicitar(String solicitud) throws Exception {
         
-        Registry reg = LocateRegistry.getRegistry("192.168.5.102", 3334);
+        Registry reg = LocateRegistry.getRegistry("10.0.4.87", 3334);
         RemoteInterface remote = (RemoteInterface) reg.lookup("SOLICITAR");
         Date dateS = new Date(), dateF = new Date();
         Calendar cal = Calendar.getInstance();
