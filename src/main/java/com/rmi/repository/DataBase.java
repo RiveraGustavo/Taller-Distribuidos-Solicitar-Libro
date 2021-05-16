@@ -59,6 +59,7 @@ public class DataBase {
         List<Prestamo> prestamos = new ArrayList<>();
         Prestamo prestamo;
         try {
+            sem.acquire();
             archivo = new File(arg);
             if (archivo.exists()) {
                 fr = new FileReader(archivo);
@@ -81,6 +82,7 @@ public class DataBase {
                     prestamos.add(prestamo);
                 }
                 fr.close();
+                sem.release();
             }
         } catch (Exception e) {
             System.out.println("Error en DataBase leer fichero prestamo por " + e.getMessage());
@@ -103,6 +105,7 @@ public class DataBase {
         BufferedReader br;
         Boolean modifico = false;
         try {
+            sem.acquire();
             archivo = new File(arg);
             if (archivo.exists()) {
                 br = new BufferedReader(new FileReader(archivo));
@@ -133,6 +136,7 @@ public class DataBase {
                     }
                 }
                 br.close();
+                sem.release();
                 borrar(archivo);
                 fNuevo.renameTo(archivo);
                 modifico = true;
@@ -158,6 +162,7 @@ public class DataBase {
         BufferedReader br;
         Boolean modifico = false;
         try {
+            sem.acquire();
             archivo = new File(arg);
             if (archivo.exists()) {
                 br = new BufferedReader(new FileReader(archivo));
@@ -177,6 +182,7 @@ public class DataBase {
                     }
                 }
                 br.close();
+                sem.release();
                 borrar(archivo);
                 fNuevo.renameTo(archivo);
                 modifico = true;
@@ -204,9 +210,11 @@ public class DataBase {
                 fFichero.createNewFile();
             }
             bw = new BufferedWriter(new FileWriter(fFichero, true));
+            sem.acquire();
             bw.write(cadena);
             bw.newLine();
             bw.close();
+            sem.release();
 
         } catch (Exception e) {
             System.out.println(e);
@@ -247,9 +255,10 @@ public class DataBase {
                 String insertar = prestamo.getIdSolicitud() + "," + fechaInicial + "," + fechaFinal + ","
                         + prestamo.getIdSolicitante() + "," + prestamo.getCodigoLibro() + ","
                         + prestamo.getFinalizado().toString();
-
+                sem.acquire();
                 escribir(archivo, insertar);
                 br.close();
+                sem.release();
                 modifico = true;
 
             } else {
