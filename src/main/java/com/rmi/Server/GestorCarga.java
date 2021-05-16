@@ -25,8 +25,10 @@ public class GestorCarga
             Registry reg = LocateRegistry.createRegistry(3333);
             //Naming.rebind("rmi://192.168.0.5:3333/SOLICITAR", new ServerImplements());
             //Naming.rebind("rmi://localhost:3333/SOLICITAR", new ServerImplements());
-            //RemoteInterface stub = (RemoteInterface) UnicastRemoteObject.exportObject(in, 0);
-            reg.rebind("SOLICITAR", new ServerImplements());
+            ServerImplements cliente = new ServerImplements();
+            RemoteInterface stub = 
+                    (RemoteInterface) UnicastRemoteObject.exportObject(cliente, 0);
+            reg.rebind("SOLICITAR", stub );
             System.out.println("SERVER ON");
         } catch (RemoteException ex) {
             Logger.getLogger(GestorCarga.class.getName()).log(Level.SEVERE, null, ex);

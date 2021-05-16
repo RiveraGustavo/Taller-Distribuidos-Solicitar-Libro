@@ -18,10 +18,10 @@ import java.util.Date;
  *
  * @author Gustavo Rivera
  */
-public class ServerImplements extends UnicastRemoteObject implements RemoteInterface {
+public class ServerImplements implements RemoteInterface {
 
-    public ServerImplements() throws RemoteException {
-        super(); 
+    public ServerImplements() {
+
     }
 
     @Override
