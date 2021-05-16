@@ -7,11 +7,13 @@ import java.util.List;
 import com.rmi.models.Libro;
 import com.rmi.models.Prestamo;
 import java.util.*;
+import java.util.concurrent.Semaphore;
 
 public class DataBase {
 
-    public DataBase() {
-
+    Semaphore sem;
+    public DataBase(Semaphore sem) {
+       this.sem = sem;
     }
 
     public List<Libro> leerFicheroLibro(String arg) {
@@ -21,6 +23,7 @@ public class DataBase {
         List<Libro> libros = new ArrayList<>();
         Libro libroNuevo;
         try {
+            sem.acquire();
             archivo = new File(arg);
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
@@ -34,6 +37,7 @@ public class DataBase {
                 libros.add(libroNuevo);
             }
             fr.close();
+            sem.release();
         } catch (Exception e) {
             System.out.println("Error en DataBase por " + e.getMessage());
         } finally {
@@ -123,9 +127,9 @@ public class DataBase {
                 while ((linea = br.readLine()) != null) {
                     textElements = linea.split(",");
                     if (Integer.parseInt(textElements[0]) == prestamo.getIdSolicitud()) {
-                        Escribir(fNuevo, insertar);
+                        escribir(fNuevo, insertar);
                     } else {
-                        Escribir(fNuevo, linea);
+                        escribir(fNuevo, linea);
                     }
                 }
                 br.close();
@@ -166,10 +170,10 @@ public class DataBase {
                 while ((linea = br.readLine()) != null) {
                     textElements = linea.split(",");
                     if (Integer.parseInt(textElements[0]) == libro.getID()) {
-                        Escribir(fNuevo, insertar);
+                        escribir(fNuevo, insertar);
 
                     } else {
-                        Escribir(fNuevo, linea);
+                        escribir(fNuevo, linea);
                     }
                 }
                 br.close();
@@ -193,14 +197,15 @@ public class DataBase {
      * @param fFichero
      * @param cadena
      */
-    public void Escribir(File fFichero, String cadena) {
+    public void escribir(File fFichero, String cadena) {
         BufferedWriter bw;
         try {
             if (!fFichero.exists()) {
                 fFichero.createNewFile();
             }
             bw = new BufferedWriter(new FileWriter(fFichero, true));
-            bw.write(cadena + "\n");
+            bw.write(cadena);
+            bw.newLine();
             bw.close();
 
         } catch (Exception e) {
@@ -243,7 +248,7 @@ public class DataBase {
                         + prestamo.getIdSolicitante() + "," + prestamo.getCodigoLibro() + ","
                         + prestamo.getFinalizado().toString();
 
-                Escribir(archivo, insertar);
+                escribir(archivo, insertar);
                 br.close();
                 modifico = true;
 

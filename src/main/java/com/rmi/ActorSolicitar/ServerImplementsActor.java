@@ -13,6 +13,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
+import java.util.concurrent.Semaphore;
 
 /**
  *
@@ -26,7 +27,8 @@ public class ServerImplementsActor extends UnicastRemoteObject implements Remote
 
     @Override
     public String solicitar(String solicitud) throws Exception {
-        LibroController libroController = new LibroController("libros.txt");
+        Semaphore sem = new Semaphore(1);
+        LibroController libroController = new LibroController("libros.txt", sem);
         StringTokenizer sscanf = new StringTokenizer(solicitud, " ");
         String peticion = sscanf.nextToken();
         String codigoLibro = sscanf.nextToken().toString();
@@ -37,7 +39,7 @@ public class ServerImplementsActor extends UnicastRemoteObject implements Remote
         SimpleDateFormat objSDF = new SimpleDateFormat("dd-MM-yyyy");
         dat1 = objSDF.parse(fechaSolicitud);
         dat2 = objSDF.parse(fechaFinalizacion);
-        String estado = libroController.solicitarLibro(codigoLibro, idSolicitante, dat1, dat2);
+        String estado = libroController.solicitarLibro(codigoLibro, idSolicitante, dat1, dat2, sem);
         return estado;
     }
 

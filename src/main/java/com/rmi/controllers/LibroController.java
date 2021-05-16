@@ -6,18 +6,19 @@ import com.rmi.models.Libro;
 import com.rmi.models.Prestamo;
 import com.rmi.repository.DataBase;
 import java.util.Date;
+import java.util.concurrent.Semaphore;
 
 public class LibroController {
 
     private DataBase data;
     private String arg;
 
-    public LibroController() {
-        this.data = new DataBase();
+    public LibroController(Semaphore sem) {
+        this.data = new DataBase(sem);
     }
 
-    public LibroController(String arg) {
-        this.data = new DataBase();
+    public LibroController(String arg, Semaphore sem) {
+        this.data = new DataBase(sem);
         this.arg = arg;
     }
 
@@ -76,7 +77,11 @@ public class LibroController {
         return modifico;
     }
 
-    public String solicitarLibro(String codigoLibro, int idSolicitante, Date fechaSolicitud, Date fechaDevolucion) {
+    public String solicitarLibro(String codigoLibro, 
+            int idSolicitante, 
+            Date fechaSolicitud, 
+            Date fechaDevolucion,
+            Semaphore sem) {
         Libro libro = obtenerLibrosByCodigo(codigoLibro);
         String infoLibro = "";
         int total = 0, prestados = 0, disponibles = 0;
@@ -93,7 +98,7 @@ public class LibroController {
             disponibles = libro.getUnidades();
             total = prestados + disponibles;
             if (valido.equalsIgnoreCase("Satisfactoria")) {
-                PrestamoController prestamosController = new PrestamoController("prestamos.txt");
+                PrestamoController prestamosController = new PrestamoController("prestamos.txt", sem);
                 List<Prestamo> prestamosLista = prestamosController.obtenerPrestamos();
                 Prestamo prestamo;
                 if(prestamosLista == null || prestamosLista.size() == 0){

@@ -5,6 +5,7 @@ import com.rmi.models.Prestamo;
 import com.rmi.repository.DataBase;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 
 
@@ -12,14 +13,15 @@ public class PrestamoController {
 
     private String arg;
     private DataBase data;
+    
 
-    public PrestamoController(String arg) {
-        this.data = new DataBase();
+    public PrestamoController(String arg,Semaphore sem) {
+        this.data = new DataBase(sem);
         this.arg = arg;
     }
 
-    public PrestamoController() {
-        this.data = new DataBase();
+    public PrestamoController(Semaphore sem) {
+        this.data = new DataBase(sem);
     }
 
     public List<Prestamo> obtenerPrestamos() {
@@ -53,11 +55,11 @@ public class PrestamoController {
         return modificado;
     }
 
-    public boolean devolverPrestamo(int idSolicitud) {
+    public boolean devolverPrestamo(int idSolicitud, Semaphore sem) {
         Prestamo prestamo = obtenerPrestamoById(idSolicitud);
         String codigo = prestamo.getCodigoLibro();
         Boolean modificado = false;
-        LibroController libro = new LibroController("libros.txt");
+        LibroController libro = new LibroController("libros.txt",sem);
         Libro lib = libro.obtenerLibrosByCodigo(codigo);
         if (lib != null) {
             if (prestamo != null && !prestamo.getFinalizado()) {
