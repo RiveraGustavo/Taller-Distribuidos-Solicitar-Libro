@@ -46,7 +46,7 @@ public class Client {
             while (nEnviar < peticiones.size()) {
 
                 //System.setProperty("java.rmi.server.hostname","192.168.5.102");
-                Registry reg = LocateRegistry.getRegistry("192.168.0.114", 3333);
+                Registry reg = LocateRegistry.getRegistry("10.0.4.87", 3333);
                 //Registry reg = LocateRegistry.getRegistry("192.168.5.102", 3333);                
                 RemoteInterface remote = (RemoteInterface) reg.lookup("SOLICITAR");
                 //RemoteInterface remote = (RemoteInterface) Naming.lookup("rmi://192.168.0.5:3333/SOLICITAR");
