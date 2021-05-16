@@ -210,11 +210,9 @@ public class DataBase {
                 fFichero.createNewFile();
             }
             bw = new BufferedWriter(new FileWriter(fFichero, true));
-            sem.acquire();
             bw.write(cadena);
             bw.newLine();
             bw.close();
-            sem.release();
 
         } catch (Exception e) {
             System.out.println(e);
