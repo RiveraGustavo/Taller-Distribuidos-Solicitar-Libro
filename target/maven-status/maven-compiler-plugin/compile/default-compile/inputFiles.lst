@@ -1,4 +1,12 @@
-C:\Users\Gustavo Rivera\Documents\Noveno\Distri\ProyectoBiblioteca\SolicitudLibro\src\main\java\com\rmi\RMI\RemoteInterface.java
-C:\Users\Gustavo Rivera\Documents\Noveno\Distri\ProyectoBiblioteca\SolicitudLibro\src\main\java\com\rmi\Server\MainServer.java
-C:\Users\Gustavo Rivera\Documents\Noveno\Distri\ProyectoBiblioteca\SolicitudLibro\src\main\java\com\rmi\Client\Client.java
-C:\Users\Gustavo Rivera\Documents\Noveno\Distri\ProyectoBiblioteca\SolicitudLibro\src\main\java\com\rmi\Server\ServerImplements.java
+C:\Users\admin\Documents\GitHub\Taller-Distribuidos-Solicitar-Libro\src\main\java\com\rmi\controllers\PrestamoController.java
+C:\Users\admin\Documents\GitHub\Taller-Distribuidos-Solicitar-Libro\src\main\java\com\rmi\Client\DataBase.java
+C:\Users\admin\Documents\GitHub\Taller-Distribuidos-Solicitar-Libro\src\main\java\com\rmi\models\Libro.java
+C:\Users\admin\Documents\GitHub\Taller-Distribuidos-Solicitar-Libro\src\main\java\com\rmi\repository\DataBase.java
+C:\Users\admin\Documents\GitHub\Taller-Distribuidos-Solicitar-Libro\src\main\java\com\rmi\Server\GestorCarga.java
+C:\Users\admin\Documents\GitHub\Taller-Distribuidos-Solicitar-Libro\src\main\java\com\rmi\controllers\LibroController.java
+C:\Users\admin\Documents\GitHub\Taller-Distribuidos-Solicitar-Libro\src\main\java\com\rmi\ActorSolicitar\ActorSolicitar.java
+C:\Users\admin\Documents\GitHub\Taller-Distribuidos-Solicitar-Libro\src\main\java\com\rmi\Client\Client.java
+C:\Users\admin\Documents\GitHub\Taller-Distribuidos-Solicitar-Libro\src\main\java\com\rmi\Server\ServerImplements.java
+C:\Users\admin\Documents\GitHub\Taller-Distribuidos-Solicitar-Libro\src\main\java\com\rmi\ActorSolicitar\ServerImplementsActor.java
+C:\Users\admin\Documents\GitHub\Taller-Distribuidos-Solicitar-Libro\src\main\java\com\rmi\models\Prestamo.java
+C:\Users\admin\Documents\GitHub\Taller-Distribuidos-Solicitar-Libro\src\main\java\com\rmi\RMI\RemoteInterface.java

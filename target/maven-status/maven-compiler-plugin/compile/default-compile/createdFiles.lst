@@ -1,2 +1,2 @@
-com\rmi\RMI\RemoteInterface.class
 com\rmi\Server\ServerImplements.class
+com\rmi\RMI\RemoteInterface.class
