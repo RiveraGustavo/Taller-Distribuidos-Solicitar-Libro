@@ -23,7 +23,7 @@ public class DataBase {
         File file = new File(nameFile);
         boolean fileIsNotLocked = file.renameTo(file);
         while (!fileIsNotLocked) {
-            Thread.sleep(100);
+            Thread.sleep(1000);
             fileIsNotLocked = file.renameTo(file);
         }
         return true;
@@ -54,13 +54,6 @@ public class DataBase {
         } catch (Exception e) {
             System.out.println("Error en DataBase por " + e.getMessage());
         } finally {
-            try {
-                if (null != fr) {
-                    fr.close();
-                }
-            } catch (Exception e2) {
-                System.out.println("Error en DataBase Leer Fichero libro por " + e2.getMessage());
-            }
             return libros;
         }
     }
@@ -100,13 +93,6 @@ public class DataBase {
         } catch (Exception e) {
             System.out.println("Error en DataBase leer fichero prestamo por " + e.getMessage());
         } finally {
-            try {
-                if (null != fr) {
-                    fr.close();
-                }
-            } catch (Exception e2) {
-                System.out.println("Error en DataBase fichero prestamo por" + e2.getMessage());
-            }
             return prestamos;
         }
     }
@@ -284,7 +270,6 @@ public class DataBase {
                     throw new Exception("Error en DataBase fichero prestamo por fichero no existe");
                 }
             }
-
         } catch (Exception e) {
             System.out.println(e);
         }
